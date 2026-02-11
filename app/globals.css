@@ -165,6 +165,14 @@
     --shadow-2xl: var(--shadow-2xl);
 }
 
+/* Add cursor pointer to buttons by default - this is coming from tailwind docs */
+@layer base {
+    button:not(:disabled),
+    [role='button']:not(:disabled) {
+        cursor: pointer;
+    }
+}
+
 @layer base {
     * {
         @apply border-border outline-ring/50;

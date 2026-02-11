@@ -25,9 +25,22 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <ClerkProvider>
+        <ClerkProvider
+            appearance={{
+                // 1. Set the base theme to dark so Clerk handles internal contrast
+                variables: {
+                    // 2. Reference your raw CSS variables directly
+                    colorPrimary: 'var(--primary)',
+                    colorBackground: 'var(--card)',
+                    colorText: 'var(--foreground)',
+                    colorTextSecondary: 'var(--foreground)',
+                    colorInputBackground: 'var(--input)',
+                    colorInputText: 'var(--foreground)',
+                },
+            }}
+        >
             <html lang="en">
-                <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+                <body className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>
                     {children}
                 </body>
             </html>
