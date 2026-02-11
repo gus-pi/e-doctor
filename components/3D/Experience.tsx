@@ -8,7 +8,7 @@ const Experience = () => {
 
     return (
         <group ref={mainGroup}>
-            <FullScene position={[3, -2, 0]} />
+            <FullScene position={[0, -1, 0]} />
             {/* <pointLight position={[0, 3, 0]} /> */}
             <Environment
                 preset="apartment"
