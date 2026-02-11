@@ -1,17 +1,13 @@
 'use client';
 
-import Experience from '@/components/3D/Experience';
 import CTA from '@/components/landing/CTA';
+import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
 import HowItWorks from '@/components/landing/HowItWorks';
 import PricingSection from '@/components/landing/PricingSection';
 import WhatToAsk from '@/components/landing/WhatToAsk';
-import { SignedIn, SignedOut, SignOutButton, SignUpButton } from '@clerk/nextjs';
-import { OrbitControls } from '@react-three/drei';
-import { Canvas, useFrame } from '@react-three/fiber';
 import { useLayoutEffect, useMemo, useRef } from 'react';
-import { Footer } from 'react-day-picker';
 import * as THREE from 'three';
 
 export default function Home() {

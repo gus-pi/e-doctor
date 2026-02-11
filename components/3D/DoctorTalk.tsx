@@ -41,6 +41,10 @@ export function DoctorTalk(props: JSX.IntrinsicElements['group']) {
     const { nodes, materials } = useGraph(clone) as unknown as GLTFResult;
     const { actions } = useAnimations(animations, group);
 
+    if (animations.length > 0) {
+        animations[0].name = 'Talk';
+    }
+
     useEffect(() => {
         const action = actions['Talk'];
         if (action) action.reset().fadeIn(0.5).play();
@@ -48,10 +52,6 @@ export function DoctorTalk(props: JSX.IntrinsicElements['group']) {
             action?.fadeOut(0.5);
         };
     }, [actions]);
-
-    if (animations.length > 0) {
-        animations[0].name = 'Talk';
-    }
 
     return (
         <group ref={group} {...props} dispose={null}>

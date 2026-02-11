@@ -1,6 +1,7 @@
+'use client';
+
 import { Canvas } from '@react-three/fiber';
 import { MessageCircleIcon, MessageSquareIcon } from 'lucide-react';
-import Image from 'next/image';
 import { DoctorTalk } from '../3D/DoctorTalk';
 import { useRef } from 'react';
 import * as THREE from 'three';
@@ -9,7 +10,10 @@ import { Environment } from '@react-three/drei';
 function WhatToAsk() {
     const mainGroup = useRef<THREE.Group>(null!);
     return (
-        <section className="relative py-32 px-6 overflow-hidden bg-gradient-to-b from-background to-muted/20">
+        <section
+            className="relative py-32 px-6 overflow-hidden bg-gradient-to-b from-background to-muted/20"
+            id="what-to-ask"
+        >
             <div className="relative z-10 max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-20">
@@ -34,7 +38,7 @@ function WhatToAsk() {
                     </p>
                 </div>
 
-                <div className="grid lg:grid-cols-2 gap-16 items-strech">
+                <div className="grid lg:grid-cols-2 gap-16 items-stretch">
                     {/* Left Side - Interactive Chat Examples */}
                     <div className="space-y-8">
                         <div className="space-y-6">
