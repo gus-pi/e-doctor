@@ -1,3 +1,5 @@
+'use client';
+
 import { Environment } from '@react-three/drei';
 import { useRef } from 'react';
 import * as THREE from 'three';
