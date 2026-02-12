@@ -18,7 +18,7 @@ model User {
   clerkId   String   @unique
   email     String   @unique
   firstName String?
-  lasttName String?
+  lastName  String?
   phone     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
