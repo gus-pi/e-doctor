@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: 'E-Doctor - AI powered mdecial assistant',
+    title: 'E-Doctor - AI powered medical assistant',
     description:
-        'Get instant medical advise thorugh voicecalls with our AI assistant. Available 24/7',
+        'Get instant medical advise through voice calls with our AI assistant. Available 24/7',
 };
 
 export default function RootLayout({

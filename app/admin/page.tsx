@@ -8,7 +8,7 @@ const AdminPage = async () => {
     if (!user) redirect('/');
 
     const adminEmail = process.env.ADMIN_EMAIL;
-    const userEmail = user.emailAddresses[0]?.emailAddress;
+    const userEmail = user.primaryEmailAddress?.emailAddress;
 
     if (!adminEmail || userEmail !== adminEmail) redirect('/dashboard');
 

@@ -1,6 +1,6 @@
 import { formatPhoneNumber } from '@/lib/utils';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     Dialog,
     DialogContent,
@@ -25,6 +25,12 @@ interface EditDoctorDialogProps {
 function EditDoctorDialog({ doctor, isOpen, onClose }: EditDoctorDialogProps) {
     const [editingDoctor, setEditingDoctor] = useState<Doctor | null>(doctor);
 
+    useEffect(() => {
+        if (isOpen) {
+            setEditingDoctor(doctor);
+        }
+    }, [isOpen, doctor]);
+
     const updateDoctorMutation = useUpdateDoctor();
 
     const handlePhoneChange = (value: string) => {
@@ -36,7 +42,13 @@ function EditDoctorDialog({ doctor, isOpen, onClose }: EditDoctorDialogProps) {
 
     const handleSave = () => {
         if (editingDoctor) {
-            updateDoctorMutation.mutate({ ...editingDoctor }, { onSuccess: handleClose });
+            updateDoctorMutation.mutate(
+                { ...editingDoctor },
+                {
+                    onSuccess: handleClose,
+                    onError: (error) => console.error('Failed to update doctor:', error),
+                },
+            );
         }
     };
 
