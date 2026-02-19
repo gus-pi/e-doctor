@@ -1,4 +1,10 @@
+import Navbar from '@/components/NavBar';
+
 const Dashboard = () => {
-    return <div>Dashboard</div>;
+    return (
+        <div>
+            <Navbar />
+        </div>
+    );
 };
 export default Dashboard;
