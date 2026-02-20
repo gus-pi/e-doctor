@@ -163,7 +163,7 @@ function VapiWidget() {
                                     alt="AI Doctor"
                                     width={80}
                                     height={80}
-                                    className="w-20 h-20 object-contain"
+                                    className="w-20 h-20 object-contain brightness-0 invert"
                                 />
                             </div>
                         </div>

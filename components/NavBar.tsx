@@ -21,7 +21,7 @@ function Navbar() {
                             alt="e-doctor logo"
                             width={16}
                             height={16}
-                            className="w-7"
+                            className="w-7 brightness-0 invert"
                         />
                     </Link>
 
