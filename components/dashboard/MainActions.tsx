@@ -79,7 +79,6 @@ export default function MainActions() {
                             </p>
                         </div>
                     </div>
-
                     <div className="space-y-4">
                         <div className="flex items-center gap-3">
                             <div className="w-2 h-2 bg-primary rounded-full"></div>
@@ -94,15 +93,17 @@ export default function MainActions() {
                             <span className="text-sm">Instant confirmations</span>
                         </div>
                     </div>
-
-                    <Link href="/appointments">
-                        <Button
-                            variant="outline"
-                            className="w-full mt-6 border-2 border-primary/20 hover:border-primary/40 hover:bg-primary/5 font-semibold py-3 rounded-xl transition-all duration-300"
-                        >
-                            <CalendarIcon className="mr-2 h-5 w-5" />
-                            Schedule Now
-                        </Button>
+                    +{' '}
+                    <Link
+                        href="/appointments"
+                        className={buttonVariants({
+                            variant: 'outline',
+                            className:
+                                'w-full mt-6 border-2 border-primary/20 hover:border-primary/40 hover:bg-primary/5 font-semibold py-3 rounded-xl transition-all duration-300',
+                        })}
+                    >
+                        <CalendarIcon className="mr-2 h-5 w-5" />
+                        Schedule Now
                     </Link>
                 </CardContent>
             </Card>

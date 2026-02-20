@@ -43,10 +43,10 @@ export async function getUserAppointments() {
 
     if (!userId) throw new Error('Not authorized');
 
-    const user = await prisma.user.findUnique({ where: { clerkId: userId } });
-
-    if (!user) throw new Error('User not found');
     try {
+        const user = await prisma.user.findUnique({ where: { clerkId: userId } });
+
+        if (!user) throw new Error('User not found');
         const appointments = await prisma.appointment.findMany({
             where: {
                 userId: user.id,
@@ -69,10 +69,10 @@ export async function getUserAppointmentStats() {
 
     if (!userId) throw new Error('Not authorized');
 
-    const user = await prisma.user.findUnique({ where: { clerkId: userId } });
-
-    if (!user) throw new Error('User not found');
     try {
+        const user = await prisma.user.findUnique({ where: { clerkId: userId } });
+
+        if (!user) throw new Error('User not found');
         const [totalCount, completedCount] = await Promise.all([
             prisma.appointment.count({ where: { userId: user.id } }),
             prisma.appointment.count({ where: { userId: user.id, status: 'COMPLETED' } }),
