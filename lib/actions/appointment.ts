@@ -119,18 +119,17 @@ interface BookAppointmentInput {
 }
 
 export async function bookAppointment(input: BookAppointmentInput) {
+    const { userId } = await auth();
+    if (!userId) throw new Error('You must be logged in to book an appointment');
+
+    if (!input.doctorId || !input.date || !input.time) {
+        throw new Error('Doctor, date, and time are required');
+    }
+
+    const user = await prisma.user.findUnique({ where: { clerkId: userId } });
+    if (!user) throw new Error('User not found. Please ensure your account is properly set up.');
+
     try {
-        const { userId } = await auth();
-        if (!userId) throw new Error('You must be logged in to book an appointment');
-
-        if (!input.doctorId || !input.date || !input.time) {
-            throw new Error('Doctor, date, and time are required');
-        }
-
-        const user = await prisma.user.findUnique({ where: { clerkId: userId } });
-        if (!user)
-            throw new Error('User not found. Please ensure your account is properly set up.');
-
         const appointment = await prisma.appointment.create({
             data: {
                 userId: user.id,

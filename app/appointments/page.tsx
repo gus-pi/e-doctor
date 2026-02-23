@@ -146,7 +146,7 @@ function AppointmentsPage() {
                 )}
             </div>
 
-            {/* {bookedAppointment && (
+            {bookedAppointment && (
                 <AppointmentConfirmationModal
                     open={showConfirmationModal}
                     onOpenChange={setShowConfirmationModal}
@@ -160,7 +160,7 @@ function AppointmentsPage() {
                         userEmail: bookedAppointment.patientEmail,
                     }}
                 />
-            )} */}
+            )}
 
             {/* SHOW EXISTING APPOINTMENTS FOR THE CURRENT USER */}
             {userAppointments.length > 0 && (
