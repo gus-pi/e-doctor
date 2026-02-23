@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
                 hostname: 'i.pravatar.cc',
             },
         ],
-        // unoptimized: true,
+        unoptimized: true,
     },
 };
 
