@@ -2,6 +2,7 @@
 
 import { auth } from '@clerk/nextjs/server';
 import { prisma } from '../prisma';
+import { AppointmentStatus } from '@/generated/prisma/enums';
 
 function transformAppointment(appointment: any) {
     return {
@@ -31,7 +32,7 @@ export async function getAppointments() {
             orderBy: { createdAt: 'desc' },
         });
 
-        return appointments;
+        return appointments.map(transformAppointment);
     } catch (error) {
         console.log('Error fetching appointments:', error);
         return [];
@@ -39,27 +40,28 @@ export async function getAppointments() {
 }
 
 export async function getUserAppointments() {
-    const { userId } = await auth();
-
-    if (!userId) throw new Error('Not authorized');
-
-    const user = await prisma.user.findUnique({ where: { clerkId: userId } });
-
-    if (!user) throw new Error('User not found');
     try {
+        // get authenticated user from Clerk
+        const { userId } = await auth();
+        if (!userId) throw new Error('You must be logged in to view appointments');
+
+        // find user by clerkId from authenticated session
+        const user = await prisma.user.findUnique({ where: { clerkId: userId } });
+        if (!user)
+            throw new Error('User not found. Please ensure your account is properly set up.');
+
         const appointments = await prisma.appointment.findMany({
-            where: {
-                userId: user.id,
-            },
+            where: { userId: user.id },
             include: {
                 user: { select: { firstName: true, lastName: true, email: true } },
                 doctor: { select: { name: true, imageUrl: true } },
             },
             orderBy: [{ date: 'asc' }, { time: 'asc' }],
         });
+
         return appointments.map(transformAppointment);
     } catch (error) {
-        console.error('Error fetching user appointments ', error);
+        console.error('Error fetching user appointments:', error);
         throw new Error('Failed to fetch user appointments');
     }
 }
@@ -158,16 +160,16 @@ export async function bookAppointment(input: BookAppointmentInput) {
     }
 }
 
-// export async function updateAppointmentStatus(input: { id: string; status: AppointmentStatus }) {
-// try {
-//     const appointment = await prisma.appointment.update({
-//     where: { id: input.id },
-//     data: { status: input.status },
-//     });
+export async function updateAppointmentStatus(input: { id: string; status: AppointmentStatus }) {
+    try {
+        const appointment = await prisma.appointment.update({
+            where: { id: input.id },
+            data: { status: input.status },
+        });
 
-//     return appointment;
-// } catch (error) {
-//     console.error("Error updating appointment:", error);
-//     throw new Error("Failed to update appointment");
-// }
-// }
+        return appointment;
+    } catch (error) {
+        console.error('Error updating appointment:', error);
+        throw new Error('Failed to update appointment');
+    }
+}
