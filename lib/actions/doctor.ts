@@ -23,6 +23,25 @@ export async function getDoctors() {
     }
 }
 
+export async function getAvailableDoctors() {
+    try {
+        const doctors = await prisma.doctor.findMany({
+            where: { isActive: true },
+            include: {
+                _count: { select: { appointments: true } },
+            },
+            orderBy: { createdAt: 'asc' },
+        });
+        return doctors.map((doctor) => ({
+            ...doctor,
+            appointmentsCount: doctor._count.appointments,
+        }));
+    } catch (error) {
+        console.error('Error fetching available doctors', error);
+        return [];
+    }
+}
+
 interface CreateDoctorInput {
     name: string;
     email: string;
