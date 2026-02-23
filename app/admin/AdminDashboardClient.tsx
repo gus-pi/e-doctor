@@ -2,7 +2,7 @@
 
 import AdminStats from '@/components/admin/AdminStats';
 import Navbar from '@/components/NavBar';
-import { useGetAppointments } from '@/hooks/use-appointment';
+import { useGetAppointments } from '@/hooks/use-appointments';
 import { useGetDoctors } from '@/hooks/use-doctors';
 import { useUser } from '@clerk/nextjs';
 import { SettingsIcon } from 'lucide-react';
